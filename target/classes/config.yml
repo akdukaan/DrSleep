@@ -1,0 +1,8 @@
+World: 'world'
+NoPerms: '&cError: no permission.'
+NoSleepList: '&6The following &c%count% &6players are on the nosleep list:'
+RemovedFromNoSleep: '&6You have been removed from the nosleep list.'
+AddedToNoSleep: '&6You have been added to the nosleep list.'
+DoesSleep: '&6Good morning!'
+CannotSleep: '&c%count% &6online players prevent you from sleeping.'
+ClearNosleepDaily: true

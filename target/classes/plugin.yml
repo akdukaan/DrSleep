@@ -1,0 +1,14 @@
+name: DrSleep
+version: 0.0.5-pre1
+main: org.acornmc.drsleep.DrSleep
+api-version: 1.15
+authors: [DrBot]
+description: A fair sleeping solution
+commands:
+  nosleep:
+    description: Adds you to the nosleep list
+    usage: /<command>
+  drsleep:
+    description: DrSleep admin commands
+    usage: /<command> <reload|clear|list>
+

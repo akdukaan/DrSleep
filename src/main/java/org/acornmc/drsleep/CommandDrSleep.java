@@ -1,5 +1,6 @@
 package org.acornmc.drsleep;
 
+import org.acornmc.drsleep.configuration.ConfigManager;
 import org.bukkit.entity.Player;
 import java.util.Iterator;
 import org.bukkit.Bukkit;
@@ -11,12 +12,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.command.CommandExecutor;
 
 public class CommandDrSleep implements CommandExecutor {
-    FileConfiguration config;
     Set<UUID> nosleep;
 
-    public CommandDrSleep() {
-        this.config = DrSleep.plugin.getConfig();
+    ConfigManager configManager;
+
+    public CommandDrSleep(ConfigManager configManager) {
         this.nosleep = DrSleep.nosleep;
+        this.configManager = configManager;
     }
 
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
@@ -25,16 +27,16 @@ public class CommandDrSleep implements CommandExecutor {
         }
         if (args[0].equals("reload")) {
             if (sender.hasPermission("drsleep.reload")) {
-                DrSleep.plugin.reloadConfig();
+                configManager.reload();
                 sender.sendMessage("§6DrSleep has attempted to reload the plugin. This feature does not work in the current release.");
                 return true;
             }
-            sender.sendMessage(this.config.getString("NoPerms").replace("&", "§"));
+            sender.sendMessage(configManager.get().getString("NoPerms").replace("&", "§"));
             return true;
         }
         if (args[0].equals("list")) {
             if (sender.hasPermission("drsleep.list")) {
-                sender.sendMessage(this.config.getString("NoSleepList").replace("&", "§").replace("%count%", Integer.toString(this.nosleep.size())));
+                sender.sendMessage(configManager.get().getString("NoSleepList").replace("&", "§").replace("%count%", Integer.toString(this.nosleep.size())));
                 String names = "§c";
                 for (final UUID uuid : this.nosleep) {
                     final Player player = Bukkit.getPlayer(uuid);
@@ -45,7 +47,7 @@ public class CommandDrSleep implements CommandExecutor {
                 sender.sendMessage(names);
                 return true;
             }
-            sender.sendMessage(this.config.getString("NoPerms").replace("&", "§"));
+            sender.sendMessage(configManager.get().getString("NoPerms").replace("&", "§"));
             return true;
         }
         if (args[0].equals("clear")) {
@@ -61,7 +63,7 @@ public class CommandDrSleep implements CommandExecutor {
                 sender.sendMessage(names);
                 return true;
             }
-            sender.sendMessage(this.config.getString("NoPerms").replace("&", "§"));
+            sender.sendMessage(configManager.get().getString("NoPerms").replace("&", "§"));
             return true;
         }
         return false;

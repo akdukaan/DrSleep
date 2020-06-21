@@ -10,8 +10,7 @@ import java.util.Set;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.command.CommandExecutor;
 
-public class CommandDrSleep implements CommandExecutor
-{
+public class CommandDrSleep implements CommandExecutor {
     FileConfiguration config;
     Set<UUID> nosleep;
 
@@ -27,13 +26,13 @@ public class CommandDrSleep implements CommandExecutor
         if (args[0].equals("reload")) {
             if (sender.hasPermission("drsleep.reload")) {
                 DrSleep.plugin.reloadConfig();
-                sender.sendMessage("§6DrSleep has attempted to reload the plugin. This feature may or may not work.");
+                sender.sendMessage("§6DrSleep has attempted to reload the plugin. This feature does not work in the current release.");
                 return true;
             }
             sender.sendMessage(this.config.getString("NoPerms").replace("&", "§"));
             return true;
         }
-        else if (args[0].equals("list")) {
+        if (args[0].equals("list")) {
             if (sender.hasPermission("drsleep.list")) {
                 sender.sendMessage(this.config.getString("NoSleepList").replace("&", "§").replace("%count%", Integer.toString(this.nosleep.size())));
                 String names = "§c";
@@ -49,10 +48,7 @@ public class CommandDrSleep implements CommandExecutor
             sender.sendMessage(this.config.getString("NoPerms").replace("&", "§"));
             return true;
         }
-        else {
-            if (!args[0].equals("clear")) {
-                return false;
-            }
+        if (args[0].equals("clear")) {
             if (sender.hasPermission("drsleep.clear")) {
                 String names = "§6The following players have been removed from nosleep:§c";
                 for (final UUID uuid : this.nosleep) {
@@ -68,5 +64,6 @@ public class CommandDrSleep implements CommandExecutor
             sender.sendMessage(this.config.getString("NoPerms").replace("&", "§"));
             return true;
         }
+        return false;
     }
 }

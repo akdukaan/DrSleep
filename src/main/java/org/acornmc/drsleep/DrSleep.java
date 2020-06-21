@@ -2,8 +2,9 @@ package org.acornmc.drsleep;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import org.bukkit.entity.Player;
 import org.bukkit.Bukkit;
+
+import java.util.HashSet;
 import java.util.UUID;
 import java.util.Set;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -11,7 +12,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 public final class DrSleep extends JavaPlugin {
 
     public static DrSleep plugin;
-    public static Set<UUID> nosleep;
+    public static Set<UUID> nosleep = new HashSet<>();
 
     @Override
     public void onEnable() {

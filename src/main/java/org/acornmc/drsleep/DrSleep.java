@@ -20,25 +20,26 @@ public final class DrSleep extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-
         configManager = new ConfigManager(this);
 
         getCommand("nosleep").setExecutor(new CommandNoSleep(configManager));
         getCommand("drsleep").setExecutor(new CommandDrSleep(configManager));
+
         getServer().getPluginManager().registerEvents(new EventPlayerBedEnter(configManager), this);
         getServer().getPluginManager().registerEvents(new EventLogout(), this);
+        getServer().getPluginManager().registerEvents(new EventPlayerWorldSwitch(configManager), this);
 
-        if (configManager.get().getBoolean("ClearNosleepDaily")) {
-            BukkitScheduler scheduler = getServer().getScheduler();
-            scheduler.scheduleSyncRepeatingTask(this, () -> {
-                if (Bukkit.getWorld(configManager.get().getString("World")).getTime() < 20L) {
+        BukkitScheduler scheduler = getServer().getScheduler();
+        scheduler.scheduleSyncRepeatingTask(this, () -> {
+            if (Bukkit.getWorld(configManager.get().getString("World")).getTime() < 20L) {
+                if (configManager.get().getBoolean("ClearNoSleepDaily")) {
                     for (UUID uuid : nosleep) {
                         nosleep.remove(uuid);
                         Bukkit.getPlayer(uuid).sendMessage(getConfig().getString("RemovedFromNoSleep").replace("&", "§"));
                     }
                 }
-            }, 0L, 20L);
-        }
+            }
+        }, 0L, 20L);
     }
 
     @Override

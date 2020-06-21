@@ -1,5 +1,5 @@
 name: DrSleep
-version: 0.0.5-pre1
+version: 0.0.5
 main: org.acornmc.drsleep.DrSleep
 api-version: 1.15
 authors: [DrBot]

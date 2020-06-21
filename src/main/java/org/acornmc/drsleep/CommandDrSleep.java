@@ -2,13 +2,11 @@ package org.acornmc.drsleep;
 
 import org.acornmc.drsleep.configuration.ConfigManager;
 import org.bukkit.entity.Player;
-import java.util.Iterator;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import java.util.UUID;
 import java.util.Set;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.command.CommandExecutor;
 
 public class CommandDrSleep implements CommandExecutor {
@@ -28,7 +26,7 @@ public class CommandDrSleep implements CommandExecutor {
         if (args[0].equals("reload")) {
             if (sender.hasPermission("drsleep.reload")) {
                 configManager.reload();
-                sender.sendMessage("§6DrSleep has attempted to reload the plugin. This feature does not work in the current release.");
+                sender.sendMessage("§6DrSleep config reloaded.");
                 return true;
             }
             sender.sendMessage(configManager.get().getString("NoPerms").replace("&", "§"));
@@ -36,15 +34,13 @@ public class CommandDrSleep implements CommandExecutor {
         }
         if (args[0].equals("list")) {
             if (sender.hasPermission("drsleep.list")) {
-                sender.sendMessage(configManager.get().getString("NoSleepList").replace("&", "§").replace("%count%", Integer.toString(this.nosleep.size())));
-                String names = "§c";
-                for (final UUID uuid : this.nosleep) {
-                    final Player player = Bukkit.getPlayer(uuid);
-                    if (player != null) {
-                        names = names + player.getName() + " ";
-                    }
+                int count = nosleep.size();
+                String list = configManager.get().getString("NoSleepList").replace("&", "§").replace("%count%", Integer.toString(count));
+                for (UUID uuid : this.nosleep) {
+                    String playername = Bukkit.getPlayer(uuid).getName();
+                    list += " " + playername;
                 }
-                sender.sendMessage(names);
+                sender.sendMessage(list);
                 return true;
             }
             sender.sendMessage(configManager.get().getString("NoPerms").replace("&", "§"));
@@ -52,12 +48,13 @@ public class CommandDrSleep implements CommandExecutor {
         }
         if (args[0].equals("clear")) {
             if (sender.hasPermission("drsleep.clear")) {
-                String names = "§6The following players have been removed from nosleep:§c";
-                for (final UUID uuid : this.nosleep) {
+                int count = nosleep.size();
+                String names = configManager.get().getString("NoSleepClear").replace("&", "§").replace("%count%", Integer.toString(count));
+                for (final UUID uuid : nosleep) {
                     final Player player = Bukkit.getPlayer(uuid);
                     if (player != null) {
-                        names = names + " " + player.getName();
-                        this.nosleep.remove(player.getUniqueId());
+                        nosleep.remove(player.getUniqueId());
+                        names += " " + player.getName();
                     }
                 }
                 sender.sendMessage(names);

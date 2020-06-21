@@ -1,5 +1,7 @@
 org\acornmc\drsleep\DrSleep.class
 org\acornmc\drsleep\CommandNoSleep.class
+org\acornmc\drsleep\configuration\ConfigManager.class
+org\acornmc\drsleep\EventPlayerWorldSwitch.class
 org\acornmc\drsleep\EventLogout.class
 org\acornmc\drsleep\CommandDrSleep.class
 org\acornmc\drsleep\EventPlayerBedEnter.class

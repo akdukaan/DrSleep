@@ -1,8 +1,10 @@
 World: 'world'
 NoPerms: '&cError: no permission.'
-NoSleepList: '&6The following &c%count% &6players are on the nosleep list:'
+NoSleepList: '&6The following &c%count% &6players are on the nosleep list:&c'
+NoSleepClear: '§6The following §c%count% §6players have been removed from the nosleep list:§c'
 RemovedFromNoSleep: '&6You have been removed from the nosleep list.'
 AddedToNoSleep: '&6You have been added to the nosleep list.'
 DoesSleep: '&6Good morning!'
 CannotSleep: '&c%count% &6online players prevent you from sleeping.'
-ClearNosleepDaily: true
+NotInConfiguredWorld: '&cYou must be in the overworld to execute this command.'
+ClearNoSleepDaily: true

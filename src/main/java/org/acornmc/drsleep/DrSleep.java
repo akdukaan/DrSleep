@@ -1,5 +1,6 @@
 package org.acornmc.drsleep;
 
+import org.acornmc.drsleep.configuration.ConfigManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.bukkit.Bukkit;
@@ -14,21 +15,23 @@ public final class DrSleep extends JavaPlugin {
     public static DrSleep plugin;
     public static Set<UUID> nosleep = new HashSet<>();
 
+    ConfigManager configManager;
+
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-        getConfig().options().copyDefaults(true);
-        saveConfig();
         plugin = this;
-        getCommand("nosleep").setExecutor(new CommandNoSleep());
-        getCommand("drsleep").setExecutor(new CommandDrSleep());
-        getServer().getPluginManager().registerEvents(new EventPlayerBedEnter(), this);
+
+        configManager = new ConfigManager(this);
+
+        getCommand("nosleep").setExecutor(new CommandNoSleep(configManager));
+        getCommand("drsleep").setExecutor(new CommandDrSleep(configManager));
+        getServer().getPluginManager().registerEvents(new EventPlayerBedEnter(configManager), this);
         getServer().getPluginManager().registerEvents(new EventLogout(), this);
 
-        if (getConfig().getBoolean("ClearNosleepDaily")) {
+        if (configManager.get().getBoolean("ClearNosleepDaily")) {
             BukkitScheduler scheduler = getServer().getScheduler();
             scheduler.scheduleSyncRepeatingTask(this, () -> {
-                if (Bukkit.getWorld(getConfig().getString("World")).getTime() < 20L) {
+                if (Bukkit.getWorld(configManager.get().getString("World")).getTime() < 20L) {
                     for (UUID uuid : nosleep) {
                         nosleep.remove(uuid);
                         Bukkit.getPlayer(uuid).sendMessage(getConfig().getString("RemovedFromNoSleep").replace("&", "§"));

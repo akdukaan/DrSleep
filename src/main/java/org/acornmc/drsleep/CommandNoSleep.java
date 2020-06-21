@@ -1,20 +1,20 @@
 package org.acornmc.drsleep;
 
+import org.acornmc.drsleep.configuration.ConfigManager;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import java.util.UUID;
 import java.util.Set;
 import org.bukkit.command.CommandExecutor;
 
 public class CommandNoSleep implements CommandExecutor {
     Set<UUID> nosleep;
-    FileConfiguration config;
+    ConfigManager configManager;
 
-    public CommandNoSleep() {
+    public CommandNoSleep(ConfigManager configManager) {
         this.nosleep = DrSleep.nosleep;
-        this.config = DrSleep.plugin.getConfig();
+        this.configManager = configManager;
     }
 
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
@@ -23,15 +23,15 @@ public class CommandNoSleep implements CommandExecutor {
             if (player.hasPermission("drsleep.nosleep")) {
                 if (nosleep.contains(player.getUniqueId())) {
                     nosleep.remove(player.getUniqueId());
-                    player.sendMessage(config.getString("RemovedFromNoSleep").replace("&", "§"));
+                    player.sendMessage(configManager.get().getString("RemovedFromNoSleep").replace("&", "§"));
                 }
                 else {
                     nosleep.add(player.getUniqueId());
-                    player.sendMessage(config.getString("AddedToNoSleep").replace("&", "§"));
+                    player.sendMessage(configManager.get().getString("AddedToNoSleep").replace("&", "§"));
                 }
                 return true;
             }
-            player.sendMessage(config.getString("NoPerms").replace("&", "§"));
+            player.sendMessage(configManager.get().getString("NoPerms").replace("&", "§"));
         }
         System.out.println("This command is for players only");
         return true;

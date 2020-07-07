@@ -1,6 +1,7 @@
 package org.acornmc.drsleep;
 
 import org.acornmc.drsleep.configuration.ConfigManager;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.bukkit.Bukkit;
@@ -31,7 +32,12 @@ public final class DrSleep extends JavaPlugin {
 
         BukkitScheduler scheduler = getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(this, () -> {
-            if (Bukkit.getWorld(configManager.get().getString("World")).getTime() < 20L) {
+            World world = Bukkit.getWorld(configManager.get().getString("World"));
+            if (world == null) {
+                System.err.println("[DrSleep] Invalid world found in config.");
+                return;
+            }
+            if (world.getTime() < 20L) {
                 if (configManager.get().getBoolean("ClearNoSleepDaily")) {
                     for (UUID uuid : nosleep) {
                         nosleep.remove(uuid);

@@ -1,7 +1,7 @@
 name: DrSleep
 version: ${project.version}
 main: org.acornmc.drsleep.DrSleep
-api-version: 1.15
+api-version: 1.16
 authors: [DrBot]
 description: A fair sleeping solution
 commands:

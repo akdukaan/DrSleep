@@ -36,10 +36,10 @@ public class EventPlayerBedEnter implements Listener {
             player.sendMessage(configManager.get().getString("RemovedFromNoSleep").replace("&", "§"));
         }
         if (nosleep.isEmpty()) {
-            player.sendMessage(configManager.get().getString("DoesSleep").replace("&", "§"));
             world.setThundering(false);
             world.setStorm(false);
             world.setTime(0L);
+            Bukkit.broadcastMessage(configManager.get().getString("DoesSleep").replace("%PLAYER%", player.getName()).replace("&", "§"));
             return;
         }
         player.sendMessage(configManager.get().getString("CannotSleep").replace("&", "§").replace("%count%", Integer.toString(nosleep.size())));

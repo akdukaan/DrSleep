@@ -36,9 +36,9 @@ public class EventPlayerBedEnter implements Listener {
             player.sendMessage(configManager.get().getString("RemovedFromNoSleep").replace("&", "§"));
         }
         if (nosleep.isEmpty()) {
+            world.setTime(0L);
             world.setThundering(false);
             world.setStorm(false);
-            world.setTime(0L);
             Bukkit.broadcastMessage(configManager.get().getString("DoesSleep").replace("%PLAYER%", player.getName()).replace("&", "§"));
             return;
         }

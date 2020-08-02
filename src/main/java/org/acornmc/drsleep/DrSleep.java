@@ -2,11 +2,13 @@ package org.acornmc.drsleep;
 
 import org.acornmc.drsleep.configuration.ConfigManager;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.bukkit.Bukkit;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.UUID;
 import java.util.Set;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -39,10 +41,20 @@ public final class DrSleep extends JavaPlugin {
             }
             if (world.getTime() < 20L) {
                 if (configManager.get().getBoolean("ClearNoSleepDaily")) {
-                    for (UUID uuid : nosleep) {
-                        nosleep.remove(uuid);
-                        Bukkit.getPlayer(uuid).sendMessage(getConfig().getString("RemovedFromNoSleep").replace("&", "§"));
+                    int count = nosleep.size();
+                    String names = configManager.get().getString("NoSleepClear").replace("&", "§").replace("%count%", Integer.toString(count));
+                    Iterator<UUID> iterator = nosleep.iterator();
+                    while (iterator.hasNext()) {
+                        Player player = Bukkit.getPlayer(iterator.next());
+                        iterator.remove();
+                        String playername = "{null}";
+                        if (player != null) {
+                            playername = player.getName();
+                        }
+                        player.sendMessage(getConfig().getString("RemovedFromNoSleep").replace("&", "§"));
+                        names += " " + playername;
                     }
+                    System.out.println(names);
                 }
             }
         }, 0L, 20L);

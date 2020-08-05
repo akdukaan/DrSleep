@@ -6,7 +6,7 @@
 
     <groupId>org.acornmc</groupId>
     <artifactId>DrSleep</artifactId>
-    <version>0.0.7</version>
+    <version>0.0.8-SNAPSHOT2008050321</version>
     <packaging>jar</packaging>
 
     <name>DrSleep</name>

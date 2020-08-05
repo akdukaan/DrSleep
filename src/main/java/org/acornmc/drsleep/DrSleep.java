@@ -41,20 +41,7 @@ public final class DrSleep extends JavaPlugin {
             }
             if (world.getTime() < 20L) {
                 if (configManager.get().getBoolean("ClearNoSleepDaily")) {
-                    int count = nosleep.size();
-                    String names = configManager.get().getString("NoSleepClear").replace("&", "§").replace("%count%", Integer.toString(count));
-                    Iterator<UUID> iterator = nosleep.iterator();
-                    while (iterator.hasNext()) {
-                        Player player = Bukkit.getPlayer(iterator.next());
-                        iterator.remove();
-                        String playername = "{null}";
-                        if (player != null) {
-                            playername = player.getName();
-                        }
-                        player.sendMessage(getConfig().getString("RemovedFromNoSleep").replace("&", "§"));
-                        names += " " + playername;
-                    }
-                    System.out.println(names);
+                    nosleep.clear();
                 }
             }
         }, 0L, 20L);

@@ -2,13 +2,10 @@ package org.acornmc.drsleep;
 
 import org.acornmc.drsleep.configuration.ConfigManager;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import org.bukkit.Bukkit;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.UUID;
 import java.util.Set;
 import org.bukkit.scheduler.BukkitScheduler;

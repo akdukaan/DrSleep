@@ -1,5 +1,5 @@
 name: DrSleep
-version: 0.0.8-SNAPSHOT2008050321
+version: 0.0.8
 main: org.acornmc.drsleep.DrSleep
 api-version: 1.15
 authors: [DrBot]
@@ -11,4 +11,8 @@ commands:
   drsleep:
     description: DrSleep admin commands
     usage: /<command> <reload|clear|list>
+permissions:
+  drsleep.list:
+    description: list the player's on nosleep
+    default: false
 

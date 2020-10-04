@@ -31,6 +31,9 @@ public class EventPlayerBedEnter implements Listener {
             player.sendMessage("§cDrSleep configuration error: You don't have a world called " + configManager.get().getString("World") + ".");
             return;
         }
+        if (player.getWorld() != world) {
+            return;
+        }
         if (nosleep.contains(player.getUniqueId())) {
             nosleep.remove(player.getUniqueId());
             player.sendMessage(configManager.get().getString("RemovedFromNoSleep").replace("&", "§"));

@@ -11,4 +11,8 @@ commands:
   drsleep:
     description: DrSleep admin commands
     usage: /<command> <reload|clear|list>
+permissions:
+  drsleep.list:
+    description: list the player's on nosleep
+    default: false
 

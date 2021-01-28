@@ -47,6 +47,11 @@ public class EventPlayerBedEnter implements Listener {
                 world.setStorm(false);
             }
             Bukkit.broadcastMessage(configManager.get().getString("DoesSleep").replace("%PLAYER%", player.getName()).replace("&", "§"));
+            if(configManager.get().getBoolean("ClearInsomiaAfterSleep") == true){
+                for(Player p : Bukkit.getOnlinePlayers()){
+                    p.setStatistic(Statistic.TIME_SINCE_REST, 0);
+                }
+            }
             return;
         }
         player.sendMessage(configManager.get().getString("CannotSleep").replace("&", "§").replace("%count%", Integer.toString(nosleep.size())));

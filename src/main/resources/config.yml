@@ -8,3 +8,4 @@ DoesSleep: '&6%PLAYER% slept in a bed and skipped the night. If you would like t
 CannotSleep: '&c%count% &6online players prevent you from sleeping.'
 NotInConfiguredWorld: '&cYou must be in the overworld to execute this command.'
 ClearNoSleepDaily: true
+ClearInsomiaAfterSleep: true

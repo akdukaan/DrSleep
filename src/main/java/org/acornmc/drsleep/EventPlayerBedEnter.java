@@ -1,6 +1,7 @@
 package org.acornmc.drsleep;
 
 import org.acornmc.drsleep.configuration.ConfigManager;
+import org.bukkit.Statistic;
 import org.bukkit.event.EventHandler;
 import org.bukkit.World;
 import org.bukkit.entity.Player;

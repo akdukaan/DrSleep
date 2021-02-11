@@ -36,12 +36,12 @@ public final class DrSleep extends JavaPlugin {
                 plugin.getLogger().info("Invalid world found in config.");
                 return;
             }
-            if (world.getTime() < 20L) {
+            if (world.getTime() < 20) {
                 if (configManager.get().getBoolean("ClearNoSleepDaily")) {
                     nosleep.clear();
                 }
             }
-        }, 0L, 20L);
+        }, 0L, 20);
     }
 
     @Override

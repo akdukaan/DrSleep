@@ -4,6 +4,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
 public class ConfigManager {
+
     Plugin pluginRef;
     FileConfiguration fileConfiguration;
 

@@ -13,6 +13,10 @@ commands:
     description: DrSleep admin commands
     usage: /<command> <reload|clear|list>
     permission: drsleep.admin
+  sleep:
+    description: makes you sleep without a bed
+    usage: /<command>
+    permission: drsleep.sleep
 permissions:
   drsleep.nosleep:
     description: use the nosleep command
@@ -32,3 +36,6 @@ permissions:
     default: op
     children:
       - drsleep.admin
+  drsleep.sleep:
+    description: use the nosleep command
+    default: false

@@ -33,15 +33,15 @@ public final class DrSleep extends JavaPlugin {
         scheduler.scheduleSyncRepeatingTask(this, () -> {
             World world = Bukkit.getWorld(configManager.get().getString("World"));
             if (world == null) {
-                System.err.println("[DrSleep] Invalid world found in config.");
+                plugin.getLogger().info("Invalid world found in config.");
                 return;
             }
-            if (world.getTime() < 20L) {
+            if (world.getTime() < 20) {
                 if (configManager.get().getBoolean("ClearNoSleepDaily")) {
                     nosleep.clear();
                 }
             }
-        }, 0L, 20L);
+        }, 0L, 20);
     }
 
     @Override

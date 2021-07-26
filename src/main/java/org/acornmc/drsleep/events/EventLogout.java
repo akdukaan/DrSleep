@@ -1,5 +1,6 @@
-package org.acornmc.drsleep;
+package org.acornmc.drsleep.events;
 
+import org.acornmc.drsleep.DrSleep;
 import org.bukkit.event.EventHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerQuitEvent;

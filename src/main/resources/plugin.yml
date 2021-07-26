@@ -17,6 +17,10 @@ commands:
     description: makes you sleep without a bed
     usage: /<command>
     permission: drsleep.sleep
+  togglephantoms:
+    description: makes you sleep without a bed
+    usage: /<command>
+    permission: drsleep.togglephantoms
 permissions:
   drsleep.nosleep:
     description: use the nosleep command
@@ -37,5 +41,12 @@ permissions:
     children:
       - drsleep.admin
   drsleep.sleep:
-    description: use the nosleep command
+    description: use the sleep command
     default: false
+    children:
+      - drsleep.admin
+  drsleep.togglephantoms :
+    description: use the togglephantoms  command
+    default: false
+    children:
+      - drsleep.admin

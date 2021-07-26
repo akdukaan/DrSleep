@@ -1,12 +1,12 @@
-Worlds:
-  - 'world'
+World: 'world'
 NoPerms: '&cError: no permission.'
 NoSleepList: '&6The following &c%count% &6players are on the nosleep list:&c'
 NoSleepClear: '&6The following §c%count% &6players have been removed from the nosleep list:&c'
 RemovedFromNoSleep: '&6You have been removed from the nosleep list.'
 AddedToNoSleep: '&6You have been added to the nosleep list.'
+RemovedFromNoPhantom: '&6You have been removed from the nophantom list.'
+AddedToNoPhantom: '&6You have been added to the nophantom list.'
 DoesSleep: '&6%PLAYER% slept in a bed and skipped the night. If you would like to keep the daylight cycle, use &c/nosleep&6.'
 CannotSleep: '&c%count% &6online players prevent you from sleeping.'
 NotInConfiguredWorld: '&cYou must be in the overworld to execute this command.'
 ClearNoSleepDaily: true
-ClearInsomiaAfterSleep: true

@@ -1,5 +1,6 @@
-package org.acornmc.drsleep;
+package org.acornmc.drsleep.events;
 
+import org.acornmc.drsleep.DrSleep;
 import org.acornmc.drsleep.configuration.ConfigManager;
 import org.bukkit.Statistic;
 import org.bukkit.event.EventHandler;
@@ -48,11 +49,6 @@ public class EventPlayerBedEnter implements Listener {
                 world.setStorm(false);
             }
             Bukkit.broadcastMessage(configManager.get().getString("DoesSleep").replace("%PLAYER%", player.getName()).replace("&", "§"));
-            if(configManager.get().getBoolean("ClearInsomiaAfterSleep") == true){
-                for(Player p : Bukkit.getOnlinePlayers()){
-                    p.setStatistic(Statistic.TIME_SINCE_REST, 0);
-                }
-            }
             return;
         }
         player.sendMessage(configManager.get().getString("CannotSleep").replace("&", "§").replace("%count%", Integer.toString(nosleep.size())));

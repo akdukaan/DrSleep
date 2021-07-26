@@ -1,5 +1,6 @@
-package org.acornmc.drsleep;
+package org.acornmc.drsleep.commands;
 
+import org.acornmc.drsleep.DrSleep;
 import org.acornmc.drsleep.configuration.ConfigManager;
 import org.bukkit.World;
 import org.bukkit.entity.Player;

@@ -1,7 +1,7 @@
 name: DrSleep
 version: ${project.version}
 main: org.acornmc.drsleep.DrSleep
-api-version: 1.16
+api-version: 1.17
 authors: [DrBot]
 description: A fair sleeping solution
 commands:
@@ -18,35 +18,28 @@ commands:
     usage: /<command>
     permission: drsleep.sleep
   togglephantoms:
-    description: makes you sleep without a bed
+    description: togglephantoms
     usage: /<command>
     permission: drsleep.togglephantoms
 permissions:
   drsleep.nosleep:
     description: use the nosleep command
-    default: false
+    default: op
   drsleep.list:
     description: list the players on nosleep
     default: op
-    children:
-      - drsleep.admin
   drsleep.clear:
     description: clears the drsleep list
     default: op
-    children:
-      - drsleep.admin
   drsleep.reload:
     description: reloads DrSleep
     default: op
-    children:
-      - drsleep.admin
   drsleep.sleep:
     description: use the sleep command
-    default: false
-    children:
-      - drsleep.admin
-  drsleep.togglephantoms :
+    default: op
+  drsleep.togglephantoms:
     description: use the togglephantoms  command
-    default: false
-    children:
-      - drsleep.admin
+    default: op
+  drsleep.admin:
+    description: use admin commands
+    default: op

@@ -1,54 +1,37 @@
 package org.acornmc.drsleep;
 
-import org.acornmc.drsleep.configuration.ConfigManager;
+import org.acornmc.drsleep.configuration.Lang;
 import org.bukkit.event.EventHandler;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.bukkit.Bukkit;
 import org.bukkit.event.player.PlayerBedEnterEvent;
-import java.util.UUID;
-import java.util.Set;
 import org.bukkit.event.Listener;
 
 public class EventPlayerBedEnter implements Listener {
-    Set<UUID> nosleep;
-
-    ConfigManager configManager;
-
-    public EventPlayerBedEnter(ConfigManager configManager) {
-        this.nosleep = DrSleep.nosleep;
-        this.configManager = configManager;
-    }
 
     @EventHandler
     public void onPlayerBedEnter(final PlayerBedEnterEvent event) {
-        if (!event.getBedEnterResult().toString().equals("OK")) {
+        if (!event.getBedEnterResult().toString().equals("OK")) return;
+        Player player = event.getPlayer();
+        Util.processPlayerRemoval(player);
+        World w = player.getWorld();
+        ManagedWorld m = Util.getManagedWorld(w);
+        if (m == null) return;
+        if (m.preventingSleep.size() > 0) {
+            Lang.send(player, Lang.CANNOT_SKIP);
             return;
         }
-        final Player player = event.getPlayer();
-        final World world = Bukkit.getWorld(configManager.get().getString("World"));
-        if (world == null) {
-            player.sendMessage("§cDrSleep configuration error: You don't have a world called " + configManager.get().getString("World") + ".");
-            return;
+        w.setTime(0L);
+        if (w.isThundering()) {
+            w.setThundering(false);
         }
-        if (player.getWorld() != world) {
-            return;
+        if (w.hasStorm()) {
+            w.setStorm(false);
         }
-        if (nosleep.contains(player.getUniqueId())) {
-            nosleep.remove(player.getUniqueId());
-            player.sendMessage(configManager.get().getString("RemovedFromNoSleep").replace("&", "§"));
+        String msg = Lang.SKIPPED_NIGHT;
+        msg = msg.replace("%PLAYER%", player.getName());
+        for (Player p : w.getPlayers()) {
+            Lang.send(p, msg);
         }
-        if (nosleep.isEmpty()) {
-            world.setTime(0L);
-            if (world.isThundering()) {
-                world.setThundering(false);
-            }
-            if (world.hasStorm()) {
-                world.setStorm(false);
-            }
-            Bukkit.broadcastMessage(configManager.get().getString("DoesSleep").replace("%PLAYER%", player.getName()).replace("&", "§"));
-            return;
-        }
-        player.sendMessage(configManager.get().getString("CannotSleep").replace("&", "§").replace("%count%", Integer.toString(nosleep.size())));
     }
 }

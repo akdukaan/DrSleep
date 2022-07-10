@@ -16,8 +16,8 @@ public final class DrSleep extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-        getCommand("allowskip").setExecutor(new CommandAllowskip());
-        getCommand("preventskip").setExecutor(new CommandPreventskip());
+        getCommand("allowsleep").setExecutor(new CommandAllowsleep());
+        getCommand("preventsleep").setExecutor(new CommandPreventsleep());
         getCommand("drsleep").setExecutor(new CommandDrSleep());
 
         getServer().getPluginManager().registerEvents(new EventPlayerBedEnter(), this);

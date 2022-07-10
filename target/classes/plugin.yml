@@ -1,23 +1,30 @@
 name: DrSleep
-version: 0.0.9-pre1
+version: 1.0-SNAPSHOT
 main: org.acornmc.drsleep.DrSleep
-api-version: 1.13
+api-version: 1.19
 authors: [DrBot]
 description: A fair sleeping solution
+load: STARTUP
 commands:
-  nosleep:
+  allowsleep:
     description: adds you to the nosleep list
     usage: /<command>
-    permission: drsleep.nosleep
+    permission: drsleep.command.preventsleep
+  preventsleep:
+    description: adds you to the nosleep list
+    usage: /<command>
+    permission: drsleep.command.preventsleep
   drsleep:
     description: DrSleep admin commands
     usage: /<command> <reload|clear|list>
     permission: drsleep.admin
 permissions:
   drsleep.nosleep:
-    description: use the nosleep command
+    description: use the preventsleep and allowsleep commands DEPRECIATED
     default: false
-  drsleep.list:
+    children:
+      - drsleep.preventsleep
+  drsleep.command.list:
     description: list the players on nosleep
     default: op
     children:

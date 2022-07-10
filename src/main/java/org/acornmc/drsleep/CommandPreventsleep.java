@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandAllowskip implements CommandExecutor {
+public class CommandPreventsleep implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
@@ -20,7 +20,7 @@ public class CommandAllowskip implements CommandExecutor {
             Lang.send(player, Lang.NO_PERMISSION);
             return true;
         }
-        boolean success = Util.processPlayerRemoval(player);
+        boolean success = Util.processPlayerAddition(player);
         if (!success) {
             Lang.send(player, Lang.DISALLOWED_WORLD);
             return true;

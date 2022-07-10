@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class ManagedWorld {
-    public static HashMap<World, ManagedWorld> managedWorlds;
+    public static HashMap<World, ManagedWorld> managedWorlds = new HashMap<>();
 
     public HashSet<Player> preventingSleep = new HashSet<>();
     public World world;

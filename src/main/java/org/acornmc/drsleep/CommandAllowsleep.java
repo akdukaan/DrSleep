@@ -25,7 +25,7 @@ public class CommandAllowsleep implements CommandExecutor {
             Lang.send(player, Lang.DISALLOWED_WORLD);
             return true;
         }
-        Lang.send(player, Lang.NOW_PREVENTING_SKIP);
+        Lang.send(player, Lang.NOW_ALLOWING_SKIP);
         return true;
     }
 }

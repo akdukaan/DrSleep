@@ -1,6 +1,7 @@
 package org.acornmc.drsleep;
 
 import org.acornmc.drsleep.configuration.Config;
+import org.acornmc.drsleep.configuration.Lang;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.Bukkit;
 
@@ -15,6 +16,9 @@ public final class DrSleep extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+
+        Config.reload(this);
+        Lang.reload(this);
 
         getCommand("allowsleep").setExecutor(new CommandAllowsleep());
         getCommand("preventsleep").setExecutor(new CommandPreventsleep());

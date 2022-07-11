@@ -31,7 +31,7 @@ public class Lang {
     private static void init() {
         NOW_PREVENTING_SKIP = getString("now-preventing-skip", NOW_PREVENTING_SKIP);
         RELOADED = getString("reloaded", RELOADED);
-        NOW_ALLOWING_SKIP = getString("not-allowing-skip", NOW_ALLOWING_SKIP);
+        NOW_ALLOWING_SKIP = getString("now-allowing-skip", NOW_ALLOWING_SKIP);
         PREVENTING_SKIP_LIST_HEADER = getString("preventing-skip-list-header", PREVENTING_SKIP_LIST_HEADER);
         PREVENTING_SKIP_LIST_ITEM = getString("preventing-skip-list-item", PREVENTING_SKIP_LIST_ITEM);
         NOT_PLAYER = getString("not-player", NOT_PLAYER);

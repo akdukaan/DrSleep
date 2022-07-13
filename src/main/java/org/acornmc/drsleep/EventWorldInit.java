@@ -10,7 +10,9 @@ public class EventWorldInit implements Listener {
     @EventHandler
     public void onWorldInit(WorldInitEvent event) {
         World w = event.getWorld();
+        Debug.log("world found " + w.getName());
         if (w.getEnvironment() == World.Environment.NORMAL) {
+            Debug.log("managing world");
             ManagedWorld.managedWorlds.put(w, new ManagedWorld(w));
         }
     }

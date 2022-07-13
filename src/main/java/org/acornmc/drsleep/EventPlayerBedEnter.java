@@ -16,7 +16,12 @@ public class EventPlayerBedEnter implements Listener {
         Util.processPlayerRemoval(player);
         World w = player.getWorld();
         ManagedWorld m = Util.getManagedWorld(w);
-        if (m == null) return;
+        if (m == null) {
+            Debug.log("managed world was null");
+            Debug.log(ManagedWorld.managedWorlds.size() + " is the size of managed worlds");
+            Debug.log(ManagedWorld.managedWorlds.toString());
+            return;
+        }
         if (m.preventingSleep.size() > 0) {
             Lang.send(player, Lang.CANNOT_SKIP);
             return;

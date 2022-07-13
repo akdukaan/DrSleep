@@ -17,6 +17,7 @@ public class Config {
     public static boolean ENABLE_BSTATS = true;
     public static String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss z";
     public static boolean CLEAR_LIST_DAILY = true;
+    public static boolean DEBUG = false;
 
     private static YamlConfiguration config;
 
@@ -25,6 +26,7 @@ public class Config {
         ENABLE_BSTATS = getBoolean("enable-bstats", true);
         TIME_FORMAT = getString("time-format", TIME_FORMAT);
         CLEAR_LIST_DAILY = getBoolean("clear-list-daily", true);
+        DEBUG = getBoolean("debug", false);
 
     }
 

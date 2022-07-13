@@ -2,6 +2,7 @@ package org.acornmc.drsleep;
 
 import org.acornmc.drsleep.configuration.Config;
 import org.acornmc.drsleep.configuration.Lang;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.Bukkit;
 
@@ -28,6 +29,14 @@ public final class DrSleep extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventLogout(), this);
         getServer().getPluginManager().registerEvents(new EventPlayerWorldSwitch(), this);
         getServer().getPluginManager().registerEvents(new EventWorldInit(), this);
+
+        for (World w : Bukkit.getWorlds()) {
+            Debug.log("world found " + w.getName());
+            if (w.getEnvironment() == World.Environment.NORMAL) {
+                Debug.log("managing world");
+                ManagedWorld.managedWorlds.put(w, new ManagedWorld(w));
+            }
+        }
 
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
             scheduler.scheduleSyncRepeatingTask(this, () -> {

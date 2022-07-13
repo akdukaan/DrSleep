@@ -9,11 +9,11 @@ commands:
   allowsleep:
     description: adds you to the nosleep list
     usage: /<command>
-    permission: drsleep.command.preventsleep
+    permission: drsleep.preventsleep
   preventsleep:
     description: adds you to the nosleep list
     usage: /<command>
-    permission: drsleep.command.preventsleep
+    permission: drsleep.preventsleep
   drsleep:
     description: DrSleep admin commands
     usage: /<command> <reload|clear|list>

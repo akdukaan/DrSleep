@@ -30,7 +30,8 @@ public final class DrSleep extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventPlayerWorldSwitch(), this);
         getServer().getPluginManager().registerEvents(new EventWorldInit(), this);
 
-        for (World w : Bukkit.getWorlds()) {
+        List<World> worlds = Bukkit.getWorlds();
+        for (World w : worlds) {
             Debug.log("world found " + w.getName());
             if (w.getEnvironment() == World.Environment.NORMAL) {
                 Debug.log("managing world");

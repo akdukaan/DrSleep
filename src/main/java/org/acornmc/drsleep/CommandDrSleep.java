@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 
 public class CommandDrSleep implements CommandExecutor {
 
-    // TODO
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (args.length == 0) {
             return false;

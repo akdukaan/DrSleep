@@ -13,8 +13,11 @@ public class Util {
         World w = player.getWorld();
         ManagedWorld m = getManagedWorld(w);
         if (m == null) return false;
-        m.preventingSleep.remove(player);
-        return true;
+        if (m.preventingSleep.contains(player)) {
+            m.preventingSleep.remove(player);
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -22,7 +22,7 @@ public class Lang {
     public static String PREVENTING_SKIP_LIST_HEADER = "&eThe following players are preventing sleep:";
     public static String PREVENTING_SKIP_LIST_ITEM = "&e%WORLD%: %PLAYERS%";
     public static String NOT_PLAYER = "&4This command can only be executed by players.";
-    public static String SKIPPED_NIGHT = "&e%PLAYER% slept in a bed and skipped the night.\nIf you would like to prevent skipping night, use /preventsleep";
+    public static String SKIPPED_NIGHT = "&e%PLAYER% slept in a bed and skipped the night.\n&eIf you would like to prevent skipping night, use /preventsleep";
     public static String CANNOT_SKIP = "&4At least one player is preventing night skip at this time.";
     public static String DISALLOWED_WORLD = "&4That command cannot be used in this world.";
     public static String NO_PERMISSION = "&4You do not have permission for that.";

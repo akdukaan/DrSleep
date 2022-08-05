@@ -2,11 +2,11 @@ package org.acornmc.drsleep;
 
 import org.acornmc.drsleep.configuration.Config;
 import org.acornmc.drsleep.configuration.Lang;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
@@ -50,6 +50,34 @@ public class CommandDrSleep implements TabExecutor {
             }
             return true;
         }
+        if (args[0].equals("clear")) {
+            if (!sender.hasPermission("drsleep.clear")) {
+                Lang.send(sender, Lang.NO_PERMISSION);
+                return true;
+            }
+
+            // If a world was not specified, clear all worlds
+            if (args.length < 2) {
+                for (ManagedWorld mw : ManagedWorld.managedWorlds.values()) {
+                    mw.clearPreventingSleep();
+                }
+                return true;
+            }
+
+            // If a world was specified, clear just that world
+            String worldName = args[1];
+            World world = Bukkit.getWorld(worldName);
+            if (world == null) {
+                return false;
+            }
+            ManagedWorld mw = ManagedWorld.managedWorlds.get(world);
+            if (mw == null) {
+                Lang.send(sender, Lang.DISALLOWED_WORLD);
+                return true;
+            }
+            mw.clearPreventingSleep();
+            return true;
+        }
         return false;
     }
 
@@ -68,6 +96,14 @@ public class CommandDrSleep implements TabExecutor {
                 list.add("list");
             }
             return StringUtil.copyPartialMatches(args[0], list, new ArrayList<>());
+        }
+        if (args.length == 2) {
+            if (sender.hasPermission("drmap.clear")) {
+                for (World w : ManagedWorld.managedWorlds.keySet()) {
+                    list.add(w.getName());
+                }
+            }
+            return StringUtil.copyPartialMatches(args[1], list, new ArrayList<>());
         }
         return list;
     }

@@ -24,8 +24,8 @@ permissions:
     default: false
     children:
       - drsleep.preventsleep
-  drsleep.command.list:
-    description: list the players on nosleep
+  drsleep.list:
+    description: list the players preventing sleep
     default: op
     children:
       - drsleep.admin

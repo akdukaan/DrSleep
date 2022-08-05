@@ -16,19 +16,19 @@ public class Lang {
     private static YamlConfiguration config;
 
     // Command outputs
-    public static String NOW_PREVENTING_SKIP = "&aYou are now preventing night skipping.";
+    public static String NOW_PREVENTING_SKIP = "&aYou are now preventing sleeping through the night.";
     public static String RELOADED = "&aDrSleep reloaded.";
-    public static String NOW_ALLOWING_SKIP = "&aYou are now allowing night skipping.";
-    public static String PREVENTING_SKIP_LIST_HEADER = "&eThe following players are preventing sleep:";
+    public static String NOW_ALLOWING_SKIP = "&aYou are already allowing sleeping through the night.";
+    public static String PREVENTING_SKIP_LIST_HEADER = "&eThe following players are preventing sleeping through the night:";
     public static String PREVENTING_SKIP_LIST_ITEM = "&e%WORLD%: %PLAYERS%";
     public static String NOT_PLAYER = "&4This command can only be executed by players.";
-    public static String SKIPPED_NIGHT = "&e%PLAYER% slept in a bed and skipped the night.\n&eIf you would like to prevent skipping night, use /preventsleep";
-    public static String CANNOT_SKIP = "&4At least one player is preventing night skip at this time.";
+    public static String SKIPPED_NIGHT = "&e%PLAYER% slept in a bed and slept through the night.\n&eIf you would like to prevent sleeping through the night, use /preventsleep";
+    public static String CANNOT_SKIP = "&4You cannot sleep through the night now.";
     public static String DISALLOWED_WORLD = "&4That command cannot be used in this world.";
     public static String NO_PERMISSION = "&4You do not have permission for that.";
     public static String LIST_CLEARED = "&aList cleared.";
-    public static String ALREADY_ALLOWING_SLEEP = "&4You are already allowing sleep.";
-    public static String ALREADY_PREVENTING_SLEEP = "&4You are already preventing sleep.";
+    public static String ALREADY_ALLOWING_SLEEP = "&4You are already allowing sleeping through the night.";
+    public static String ALREADY_PREVENTING_SLEEP = "&4You are already preventing sleeping through the night.";
 
     private static void init() {
         NOW_PREVENTING_SKIP = getString("now-preventing-skip", NOW_PREVENTING_SKIP);

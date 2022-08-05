@@ -7,9 +7,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class CommandDrSleep implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CommandDrSleep implements TabExecutor {
 
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (args.length == 0) {
@@ -44,5 +51,24 @@ public class CommandDrSleep implements CommandExecutor {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+
+        if (args.length == 1) {
+            if (sender.hasPermission("drsleep.reload")) {
+                list.add("reload");
+            }
+            if (sender.hasPermission("drmap.clear")) {
+                list.add("clear");
+            }
+            if (sender.hasPermission("drmap.list")) {
+                list.add("list");
+            }
+            return StringUtil.copyPartialMatches(args[0], list, new ArrayList<>());
+        }
+        return list;
     }
 }

@@ -33,6 +33,13 @@ public class Util {
         return true;
     }
 
+    public static boolean isPlayerPreventingSleep(Player player) {
+        World w = player.getWorld();
+        ManagedWorld m = getManagedWorld(w);
+        if (m == null) return false;
+        return m.preventingSleep.contains(player);
+    }
+
     public static ManagedWorld getManagedWorld(World w) {
         return ManagedWorld.managedWorlds.get(w);
     }

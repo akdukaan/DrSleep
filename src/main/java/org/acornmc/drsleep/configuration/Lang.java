@@ -27,6 +27,8 @@ public class Lang {
     public static String DISALLOWED_WORLD = "&4That command cannot be used in this world.";
     public static String NO_PERMISSION = "&4You do not have permission for that.";
     public static String LIST_CLEARED = "&aList cleared.";
+    public static String ALREADY_ALLOWING_SLEEP = "&4You are already allowing sleep.";
+    public static String ALREADY_PREVENTING_SLEEP = "&4You are already preventing sleep.";
 
     private static void init() {
         NOW_PREVENTING_SKIP = getString("now-preventing-skip", NOW_PREVENTING_SKIP);
@@ -39,6 +41,8 @@ public class Lang {
         CANNOT_SKIP = getString("cannot-skip", CANNOT_SKIP);
         DISALLOWED_WORLD = getString("disallowed-world", DISALLOWED_WORLD);
         LIST_CLEARED = getString("list-cleared", LIST_CLEARED);
+        ALREADY_ALLOWING_SLEEP = getString("already-allowing-sleep", ALREADY_ALLOWING_SLEEP);
+        ALREADY_PREVENTING_SLEEP = getString("already-preventing-sleep", ALREADY_PREVENTING_SLEEP);
     }
 
     // ############################  DO NOT EDIT BELOW THIS LINE  ############################

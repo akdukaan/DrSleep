@@ -20,6 +20,11 @@ public class CommandAllowsleep implements CommandExecutor {
             Lang.send(player, Lang.NO_PERMISSION);
             return true;
         }
+        boolean alreadyPreventingSleep = Util.isPlayerPreventingSleep(player);
+        if (!alreadyPreventingSleep) {
+            Lang.send(player, Lang.ALREADY_ALLOWING_SLEEP);
+            return true;
+        }
         boolean success = Util.processPlayerRemoval(player);
         if (!success) {
             Lang.send(player, Lang.DISALLOWED_WORLD);

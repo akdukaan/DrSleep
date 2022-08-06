@@ -56,6 +56,8 @@ public final class DrSleep extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        for (ManagedWorld mw : ManagedWorld.managedWorlds.values()) {
+            mw.clearPreventingSleep();
+        }
     }
 }

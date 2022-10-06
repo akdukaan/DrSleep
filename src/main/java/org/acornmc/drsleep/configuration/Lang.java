@@ -64,7 +64,7 @@ public class Lang {
             Bukkit.getLogger().log(Level.SEVERE, "Could not load " + Config.LANGUAGE_FILE + ", please correct your syntax errors", ex);
             throw Throwables.propagate(ex);
         }
-        config.options().header("This is the main language file for " + plugin.getName());
+        config.options().header("This is the language file for " + plugin.getName());
         config.options().copyDefaults(true);
 
         Lang.init();

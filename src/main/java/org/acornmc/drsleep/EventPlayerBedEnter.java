@@ -1,5 +1,6 @@
 package org.acornmc.drsleep;
 
+import org.acornmc.drsleep.configuration.Config;
 import org.acornmc.drsleep.configuration.Lang;
 import org.bukkit.event.EventHandler;
 import org.bukkit.World;
@@ -36,16 +37,20 @@ public class EventPlayerBedEnter implements Listener {
             w.setStorm(false);
         }
 
-        BukkitRunnable runnable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                w.setTime(w.getTime() + 100);
-                if (w.getTime() < 12542) {
-                    cancel();
+        if (Config.SMOOTH_SLEEP) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    w.setTime(w.getTime() + 100);
+                    if (w.getTime() < 12542) {
+                        cancel();
+                    }
                 }
-            }
-        };
-        runnable.runTaskTimer(plugin, 1L, 1L);
+            }.runTaskTimer(plugin, 1L, 1L);
+        }
+        else {
+            w.setTime(0L);
+        }
 
         String msg = Lang.SKIPPED_NIGHT;
         msg = msg.replace("%PLAYER%", player.getName());

@@ -25,7 +25,7 @@ public class EventPlayerBedEnter implements Listener {
             Debug.log(ManagedWorld.managedWorlds.toString());
             return;
         }
-        if (m.preventingSleep.isEmpty()) {
+        if (!m.preventingSleep.isEmpty()) {
             Lang.send(player, Lang.CANNOT_SKIP);
             return;
         }

@@ -1,6 +1,5 @@
 package org.acornmc.drsleep.configuration;
 
-import com.google.common.base.Throwables;
 import org.acornmc.drsleep.DrSleep;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -9,6 +8,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.logging.Level;
 
 public class Config {
@@ -48,9 +48,9 @@ public class Config {
         } catch (IOException ignore) {
         } catch (InvalidConfigurationException ex) {
             Bukkit.getLogger().log(Level.SEVERE, "Could not load config.yml, please correct your syntax errors", ex);
-            throw Throwables.propagate(ex);
+            throw new RuntimeException(ex);
         }
-        config.options().header("This is the configuration file for " + plugin.getName());
+        config.options().setHeader(Collections.singletonList("This is the configuration file for " + plugin.getName()));
         config.options().copyDefaults(true);
 
         Config.init();

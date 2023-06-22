@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CommandDrSleep implements TabExecutor {
 
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final String[] args) {
         if (args.length == 0) {
             return false;
         }

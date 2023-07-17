@@ -18,7 +18,7 @@ public class Config {
     public static String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss z";
     public static boolean CLEAR_LIST_DAILY = true;
     public static boolean DEBUG = false;
-    public static boolean SMOOTH_SLEEP = true;
+    public static Integer SMOOTH_TRANSITION_TICKS = 0;
 
     private static YamlConfiguration config;
 
@@ -28,7 +28,7 @@ public class Config {
         TIME_FORMAT = getString("time-format", TIME_FORMAT);
         CLEAR_LIST_DAILY = getBoolean("clear-list-daily", true);
         DEBUG = getBoolean("debug", false);
-        SMOOTH_SLEEP = getBoolean("smooth-transition", true);
+        SMOOTH_TRANSITION_TICKS = getInt("smooth-transition-ticks", SMOOTH_TRANSITION_TICKS);
     }
 
     // ############################  DO NOT EDIT BELOW THIS LINE  ############################
@@ -70,5 +70,10 @@ public class Config {
     private static boolean getBoolean(String path, boolean def) {
         config.addDefault(path, def);
         return config.getBoolean(path, config.getBoolean(path));
+    }
+
+    private static int getInt(String path, int def) {
+        config.addDefault(path, def);
+        return config.getInt(path, config.getInt(path));
     }
 }

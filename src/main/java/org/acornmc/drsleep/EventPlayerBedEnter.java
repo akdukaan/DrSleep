@@ -30,32 +30,55 @@ public class EventPlayerBedEnter implements Listener {
             return;
         }
 
-        if (w.isThundering()) {
-            w.setThundering(false);
-        }
-        if (w.hasStorm()) {
-            w.setStorm(false);
-        }
-
-        if (Config.SMOOTH_SLEEP) {
+        if (Config.SMOOTH_TRANSITION_TICKS > 1) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    w.setTime(w.getTime() + 100);
+                    if (!m.preventingSleep.isEmpty()) {
+                        Lang.send(player, Lang.CANNOT_SKIP);
+                        player.teleport(event.getBed().getLocation());
+                        cancel();
+                    }
+                    if (!player.isSleeping()) {
+                        cancel();
+                    }
+
+                    long addedTime = w.getTime() + Config.SMOOTH_TRANSITION_TICKS;
+                    // 23400 is the time when the day resets to 0
+                    w.setTime(addedTime > 23400 ? 0L : addedTime);
+                    // 12542 is the time when night starts
                     if (w.getTime() < 12542) {
                         cancel();
+
+                        String msg = Lang.SKIPPED_NIGHT;
+                        msg = msg.replace("%PLAYER%", player.getName());
+                        for (Player p : w.getPlayers()) {
+                            Lang.send(p, msg);
+                        }
+
+                        if (w.isThundering()) {
+                            w.setThundering(false);
+                        }
+                        if (w.hasStorm()) {
+                            w.setStorm(false);
+                        }
                     }
                 }
             }.runTaskTimer(plugin, 1L, 1L);
         }
         else {
             w.setTime(0L);
-        }
-
-        String msg = Lang.SKIPPED_NIGHT;
-        msg = msg.replace("%PLAYER%", player.getName());
-        for (Player p : w.getPlayers()) {
-            Lang.send(p, msg);
+            if (w.isThundering()) {
+                w.setThundering(false);
+            }
+            if (w.hasStorm()) {
+                w.setStorm(false);
+            }
+            String msg = Lang.SKIPPED_NIGHT;
+            msg = msg.replace("%PLAYER%", player.getName());
+            for (Player p : w.getPlayers()) {
+                Lang.send(p, msg);
+            }
         }
     }
 }

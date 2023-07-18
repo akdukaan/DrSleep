@@ -30,34 +30,33 @@ public class EventPlayerBedEnter implements Listener {
             return;
         }
 
-        if (Config.SMOOTH_TRANSITION_TICKS > 1) {
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (!m.preventingSleep.isEmpty()) {
-                        Lang.send(player, Lang.CANNOT_SKIP);
-                        player.teleport(event.getBed().getLocation());
-                        cancel();
-                    }
-                    if (!player.isSleeping()) {
-                        cancel();
-                    }
-
-                    long addedTime = w.getTime() + Config.SMOOTH_TRANSITION_TICKS;
-                    // 23400 is the time when the day resets to 0
-                    w.setTime(addedTime > 23400 ? 0L : addedTime);
-                    // 12542 is the time when night starts
-                    if (w.getTime() < 12542) {
-                        cancel();
-                        nightSkipped(w, player);
-                    }
-                }
-            }.runTaskTimer(plugin, 1L, 1L);
-        }
-        else {
+        if (Config.SMOOTH_TRANSITION_TICKS <= 1) {
             w.setTime(0L);
             nightSkipped(w, player);
+            return;
         }
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!m.preventingSleep.isEmpty()) {
+                    Lang.send(player, Lang.CANNOT_SKIP);
+                    player.teleport(event.getBed().getLocation());
+                    cancel();
+                }
+                if (!player.isSleeping()) {
+                    cancel();
+                }
+
+                long addedTime = w.getTime() + Config.SMOOTH_TRANSITION_TICKS;
+                // 23400 is the time when the day resets to 0
+                w.setTime(addedTime > 23400 ? 0L : addedTime);
+                // 12542 is the time when night starts
+                if (w.getTime() < 12542) {
+                    cancel();
+                    nightSkipped(w, player);
+                }
+            }
+        }.runTaskTimer(plugin, 1L, 1L);
     }
 
     private void nightSkipped(World w, Player player) {

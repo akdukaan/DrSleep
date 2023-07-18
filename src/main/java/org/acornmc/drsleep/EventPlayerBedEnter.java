@@ -49,36 +49,28 @@ public class EventPlayerBedEnter implements Listener {
                     // 12542 is the time when night starts
                     if (w.getTime() < 12542) {
                         cancel();
-
-                        String msg = Lang.SKIPPED_NIGHT;
-                        msg = msg.replace("%PLAYER%", player.getName());
-                        for (Player p : w.getPlayers()) {
-                            Lang.send(p, msg);
-                        }
-
-                        if (w.isThundering()) {
-                            w.setThundering(false);
-                        }
-                        if (w.hasStorm()) {
-                            w.setStorm(false);
-                        }
+                        nightSkipped(w, player);
                     }
                 }
             }.runTaskTimer(plugin, 1L, 1L);
         }
         else {
             w.setTime(0L);
-            if (w.isThundering()) {
-                w.setThundering(false);
-            }
-            if (w.hasStorm()) {
-                w.setStorm(false);
-            }
-            String msg = Lang.SKIPPED_NIGHT;
-            msg = msg.replace("%PLAYER%", player.getName());
-            for (Player p : w.getPlayers()) {
-                Lang.send(p, msg);
-            }
+            nightSkipped(w, player);
+        }
+    }
+
+    private void nightSkipped(World w, Player player) {
+        if (w.isThundering()) {
+            w.setThundering(false);
+        }
+        if (w.hasStorm()) {
+            w.setStorm(false);
+        }
+        String msg = Lang.SKIPPED_NIGHT;
+        msg = msg.replace("%PLAYER%", player.getName());
+        for (Player p : w.getPlayers()) {
+            Lang.send(p, msg);
         }
     }
 }

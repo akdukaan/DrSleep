@@ -23,7 +23,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.11.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -32,7 +32,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.4.1</version>
                 <configuration>
                     <relocations>
                         <relocation>
@@ -74,18 +74,18 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>23.0.0</version>
+            <version>24.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

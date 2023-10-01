@@ -1,5 +1,4 @@
 package org.acornmc.drsleep.configuration;
-import com.google.common.base.Throwables;
 import org.acornmc.drsleep.DrSleep;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,6 +9,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.logging.Level;
 
 public class Lang {
@@ -62,9 +62,9 @@ public class Lang {
         } catch (IOException ignore) {
         } catch (InvalidConfigurationException ex) {
             Bukkit.getLogger().log(Level.SEVERE, "Could not load " + Config.LANGUAGE_FILE + ", please correct your syntax errors", ex);
-            throw Throwables.propagate(ex);
+            throw new RuntimeException(ex);
         }
-        config.options().header("This is the language file for " + plugin.getName());
+        config.options().setHeader(Collections.singletonList("This is the language file for " + plugin.getName()));
         config.options().copyDefaults(true);
 
         Lang.init();

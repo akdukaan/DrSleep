@@ -14,13 +14,17 @@ commands:
     description: adds you to the nosleep list
     usage: /<command>
     permission: drsleep.preventsleep
+  togglesleep:
+    description: toggles you on the nosleep list
+    usage: /<command>
+    permission: drsleep.preventsleep
   drsleep:
     description: DrSleep admin commands
     usage: /<command> <reload|clear|list>
     permission: drsleep.admin
 permissions:
   drsleep.nosleep:
-    description: use the preventsleep and allowsleep commands DEPRECIATED
+    description: use the preventsleep and allowsleep commands DEPRECATED
     default: false
     children:
       - drsleep.preventsleep

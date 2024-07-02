@@ -24,6 +24,7 @@ public final class DrSleep extends JavaPlugin {
 
         getCommand("allowsleep").setExecutor(new CommandAllowsleep());
         getCommand("preventsleep").setExecutor(new CommandPreventsleep());
+        getCommand("togglesleep").setExecutor(new CommandTogglesleep());
         getCommand("drsleep").setExecutor(new CommandDrSleep());
 
         getServer().getPluginManager().registerEvents(new EventPlayerBedEnter(), this);

@@ -17,6 +17,10 @@ public class ManagedWorld {
         this.world = world;
     }
 
+    public boolean isNightSkippable() {
+        return preventingSleep.isEmpty();
+    }
+
     public void clearPreventingSleep() {
         for (Player player : preventingSleep) {
             Lang.send(player, Lang.NOW_ALLOWING_SKIP);

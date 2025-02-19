@@ -52,6 +52,10 @@ public final class DrSleep extends JavaPlugin {
                     }
                 }
             }, 0L, 20);
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new Placeholders(this).register();
+        }
     }
 
     @Override

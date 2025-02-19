@@ -1,11 +1,14 @@
 package org.acornmc.drsleep;
 
+import org.acornmc.drsleep.configuration.Config;
 import org.acornmc.drsleep.configuration.Lang;
 import org.bukkit.event.EventHandler;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.Listener;
+import org.bukkit.scheduler.BukkitRunnable;
+import static org.acornmc.drsleep.DrSleep.plugin;
 
 public class EventPlayerBedEnter implements Listener {
 
@@ -22,11 +25,41 @@ public class EventPlayerBedEnter implements Listener {
             Debug.log(ManagedWorld.managedWorlds.toString());
             return;
         }
-        if (m.preventingSleep.size() > 0) {
+        if (!m.preventingSleep.isEmpty()) {
             Lang.send(player, Lang.CANNOT_SKIP);
             return;
         }
-        w.setTime(0L);
+
+        if (Config.SMOOTH_TRANSITION_TICKS <= 1) {
+            w.setTime(0L);
+            nightSkipped(w, player);
+            return;
+        }
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!m.preventingSleep.isEmpty()) {
+                    Lang.send(player, Lang.CANNOT_SKIP);
+                    player.teleport(event.getBed().getLocation());
+                    cancel();
+                }
+                if (!player.isSleeping()) {
+                    cancel();
+                }
+
+                long addedTime = w.getTime() + Config.SMOOTH_TRANSITION_TICKS;
+                // 23400 is the time when the day resets to 0
+                w.setTime(addedTime > 23400 ? 0L : addedTime);
+                // 12542 is the time when night starts
+                if (w.getTime() < 12542) {
+                    cancel();
+                    nightSkipped(w, player);
+                }
+            }
+        }.runTaskTimer(plugin, 1L, 1L);
+    }
+
+    private void nightSkipped(World w, Player player) {
         if (w.isThundering()) {
             w.setThundering(false);
         }

@@ -18,7 +18,7 @@ public class Placeholders extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getIdentifier() {
-        return "gpflags";
+        return "drsleep";
     }
 
     @Override

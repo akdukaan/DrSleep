@@ -88,7 +88,7 @@ public class Lang {
      * @param message   Message to send
      */
     public static void send(CommandSender recipient, String message) {
-        if (recipient != null) {
+        if (recipient != null && !message.isEmpty()) {
             for (String part : colorize(message).split("\n")) {
                 recipient.sendMessage(part);
             }

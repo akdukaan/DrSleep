@@ -18,7 +18,7 @@ public class Lang {
     // Command outputs
     public static String NOW_PREVENTING_SKIP = "&aYou are now preventing sleeping through the night.";
     public static String RELOADED = "&aDrSleep reloaded.";
-    public static String NOW_ALLOWING_SKIP = "&aYou are already allowing sleeping through the night.";
+    public static String NOW_ALLOWING_SKIP = "&aYou are now allowing sleeping through the night.";
     public static String PREVENTING_SKIP_LIST_HEADER = "&eThe following players are preventing sleeping through the night:";
     public static String PREVENTING_SKIP_LIST_ITEM = "&e%WORLD%: %PLAYERS%";
     public static String NOT_PLAYER = "&4This command can only be executed by players.";
